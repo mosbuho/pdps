@@ -39,7 +39,7 @@ def fetch_page_data(driver, visible_product_box):
                 image = product.find_element(By.CSS_SELECTOR, "img").get_attribute("src")
                 flag_element = product.find_elements(By.CSS_SELECTOR, ".flag_box span")
                 flag = flag_element[0].text.strip()
-                
+
                 product_data.append(
                     {
                         "title": title,
@@ -95,8 +95,7 @@ def fetch_products_in_tab(tab_id):
 
 
 def save_data(tab_id, products):
-    file_path = f""
-    with open(file_path, "a", encoding="utf-8") as file:
+    with open(f"gs25_{tab_id.lower()}_data.txt", "a", encoding="utf-8") as file:
         for product in products:
             file.write(f"상품명 : {product['title']}, 가격 : {product['price']}, 이미지 : {product['image_url']}, 행사 : {product['flag']}\n")
     print(f"{tab_id} 상품 {len(products)}개 저장")

@@ -40,7 +40,7 @@ def fetch_cu_products():
         time.sleep(random.uniform(2, 4))
         page += 1
 
-    with open("", "w", encoding="utf-8") as f:
+    with open("cu_data.txt", "w", encoding="utf-8") as f:
         for product in products:
             f.write(f"상품명 : {product['name']}, 가격 : {product['price']}, 이미지 : {product['image']}, 행사 : {product['promotion']}\n")
     print(f"상품 {len(products)}개 저장")
