@@ -24,8 +24,7 @@ def fetch_cu_products():
             name = item.select_one(".name p").get_text(strip=True)
             image = "https:" + item.select_one(".prod_img img")["src"]
             price = item.select_one(".price strong").get_text(strip=True)
-            badge = item.select_one(".badge span")
-            promotion = badge.get_text(strip=True)
+            promotion = item.select_one(".badge span").get_text(strip=True)
 
             products.append(
                 {

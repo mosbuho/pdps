@@ -33,17 +33,10 @@ def fetch_seven_eleven_products(pTab):
                 continue
 
             name = name_elem.text.strip()
-
             product_id = item.select_one("a.btn_product_01")["href"].split("'")[1]
-
-            image_elem = item.select_one("img")
-            image = "https://www.7-eleven.co.kr" + image_elem["src"]
-
-            price_elem = item.select_one(".price_list span")
-            price = price_elem.text.strip()
-
-            promotion_elem = item.select_one(".tag_list_01 li")
-            promotion = promotion_elem.text.strip()
+            image = "https://www.7-eleven.co.kr" + item.select_one("img")["src"]
+            price = item.select_one(".price_list span").text.strip()
+            promotion = item.select_one(".tag_list_01 li").text.strip()
 
             if product_id not in products:
                 products[product_id] = {
@@ -52,6 +45,7 @@ def fetch_seven_eleven_products(pTab):
                     "price": price,
                     "promotion": promotion,
                 }
+
         print(f"{pTab}+1 {page} 페이지")
         time.sleep(random.uniform(2, 4))
         page += 1
@@ -67,7 +61,6 @@ def main():
     with open("seven_data.txt", "w", encoding="utf-8") as f:
         for product in all_products.values():
             f.write(f"상품명 : {product['name']}, 가격 : {product['price']}, 이미지 : {product['image']}, 행사 : {product['promotion']}\n")
-
     print(f"총 상품 {len(all_products)}개 저장")
 
 
